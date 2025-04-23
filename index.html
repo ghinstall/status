@@ -19,8 +19,8 @@
         } else if (text === 'Permission [DENIED] - do not install') {
           resultEl.textContent = 'Systems temporarily down.';
           resultEl.style.color = 'red';
-        } else {
-          resultEl.textContent = 'Under construction at the moment.';
+        } else if (text === 'Permission [DENIED] - under maintenance') {
+          resultEl.textContent = 'Under maintenance.';
           resultEl.style.color = 'orange';
         }
 
