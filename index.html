@@ -9,7 +9,7 @@
       try {
         const res = await fetch('https://ghinstall.github.io/permission/permission.txt');
         if (!res.ok) throw new Error('Failed to retrieve the file');
-        const text = (await res.text()).trim().toLowerCase();
+        const text = (await res.text()).trim();
 
         const resultEl = document.getElementById('permissionResult');
 
