@@ -5,12 +5,13 @@
 <meta name="robots" content="noindex, nofollow">
 </head>
 <script>
-    async function checkPermission() {
-      try {
-        const res = await fetch('https://ghinstall.github.io/permission/permission.txt');
-        if (!res.ok) throw new Error('Failed to retrieve the file');
-        const text = (await res.text()).trim();
+  async function checkPermission() {
+    try {
+      const res = await fetch('https://ghinstall.github.io/permission/permission.txt');
+      if (!res.ok) throw new Error('Failed to retrieve the file');
+      const text = (await res.text()).trim();
 
+      setTimeout(() => {
         const resultEl = document.getElementById('permissionResult');
 
         if (text === 'Permission [GRANTED] - ok to install') {
@@ -22,13 +23,24 @@
         } else if (text === 'Permission [DENIED] - under maintenance') {
           resultEl.textContent = 'Under maintenance.';
           resultEl.style.color = 'orange';
+        } else {
+          resultEl.textContent = 'Unknown status.';
+          resultEl.style.color = 'gray';
         }
+      }, 500);
 
-      } catch (err) {
+    } catch (err) {
+      setTimeout(() => {
         document.getElementById('permissionResult').textContent = 'Catched statuspage error: ' + err.message;
-      }
+      }, 500);
     }
+  }
+
+  checkPermission();
+
+  setInterval(checkPermission, 10000);
 </script>
+
 <style>
 body {
 font-family: "Arial", sans-serif;
